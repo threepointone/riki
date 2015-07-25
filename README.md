@@ -42,4 +42,5 @@ riki(src, options); // returns an array of react components
 - locals: map of locally available references when evaluating. These include stuff like `React`, `require` (needed if you're using `import`), etc
 - transforms: map of transforms for different 'types'. `js`, and `render` are included by default, so this is where you can pass transformers for markdown, jade, etc
 - regex: regular expression to detect `:(type):` separators (defaults to `/\n:([a-zA-Z0-9]*):\n/img`)
+- transpile: transform generated javascript before evaluating
 
