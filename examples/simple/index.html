@@ -1,10 +1,26 @@
 <html>
   <head>
-    <title>library-boilerplate-example-title</title>
+    <title>riki example - live coding</title>
+    <style>
+      @import 'normalize.css';
+      body{
+        font-family:helvetica, sans-serif;
+      }
+      html, body{
+        position:relative; display:block; height:100%; width:100%; padding:0; margin:0;
+      }
+      div, span, html, body{
+        box-sizing: border-box; position: relative;
+        display: flex; flex-direction: column; align-items: stretch; flex-shrink: 0;
+        border: 0 solid black; margin: 0; padding: 0;
+      }
+      #root{
+        flex:1;
+      }
+    </style>
   </head>
   <body>
-    <div id="root">
-    </div>
-	<script src="/static/bundle.js"></script>
+    <div id="root"></div>
+    <script src="bundle.js"></script>
   </body>
 </html>

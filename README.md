@@ -1,17 +1,41 @@
-library-boilerplate
-=========================
+riki
+---
 
-An opinionated setup I plan to use for my libraries.
+(work in progress)
 
-It has CommonJS and UMD builds via Babel and Webpack, ESLint, and Mocha.  
-It also has React-friendly examples folder with library code mapped to the sources.
+`npm install babel markdown riki --save`
 
-If you use this, make sure to grep for “library-boilerplate” and replace every occurrence.
-See `package.json` in the root and the example folder for the list of the available commands.
+Would you like to write your blogposts/README/articles like this?
 
-Note that this is an *opinionated* boilerplate. You might want to:
+```
+:js:
+  import {Spring} from 'react-motion'
+  import {State} from 'react-state';
 
-* Set `stage` to `2` in `.babelrc` so you don’t depend on language features that might be gone tomorrow;
-* Remove `loose: ["all"]` from `.babelrc` so the behavior is spec-compliant.
+  let box = {
+    width: 40,
+    height:40,
+    backgroundColor: 'red'
+  }
 
-You have been warned.
+:md:
+  *Welcome* to the [react-motion](https://github.com/chenglou/react-motion/) playground!
+
+:render:
+  <State initial={{top:0, left:0}}>{
+    (state, set) => <Spring endValue={state}>{
+      value => <div style={{flex:1}} onMouseMove={ e=> set({top: e.pageY, x: e.pageX})}>
+        <div style={{…value, ...box}}>move it move it</div>
+      </div>
+    }</Spring>
+  }</State>
+  ```
+
+  And then have it render automatically to html/native?
+
+  With riki, anything is possible.
+
+```js
+riki(src, options); // returns an array of react components
+```
+
