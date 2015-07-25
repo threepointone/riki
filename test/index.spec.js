@@ -11,5 +11,4 @@ describe('riki', () => {
   describe('eval', () => {
 
   });
-
 });

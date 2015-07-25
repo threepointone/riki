@@ -1,5 +1,15 @@
-import * as babel from 'babel-core/browser';
 import vm from 'vm';
+
+let CONTENT = '___content___';
+
+let transforms = {
+  js(src) {
+    return src;
+  },
+  render(src, content) {
+    return `;${content}.push(${src});`;
+  }
+};
 
 export function * matches(src, regex) {
   let match = regex.exec(src);
@@ -18,27 +28,15 @@ export function parse (str, {regex}) {
 }
 
 export function transform(arr, options) {
-  let transforms = {
-    js(src) {
-      return src;
-    },
-    render(src) {
-      return `;___content___.push(${src});`;
-    },
-    ...(options.transforms || {})
-  };
-
-  return `;var React = require('react');var ___content___ = [];` + arr.map(block => transforms[block.type](block.content)).join('');
+  let t = {...transforms, ...(options.transforms || {})};
+  return `;var ${CONTENT} = [];` + arr.map(block => t[block.type](block.content, `${CONTENT}`)).join('\n');
 }
 
 export function wrap(src) {
-  return ';(function(){' + src + ';return ___content___;})();';
+  return `;(function(){` + src + `;return ${CONTENT};})();`;
 }
 
-export function riki(src, options){
-  let transformed = wrap(babel.transform(transform(parse('\n' + src, options), options), {stage: 0}).code);
-  if(options.raw){
-    return transformed;
-  }
-  return vm.runInContext(transformed, vm.createContext(options));
+export function riki(src, options = {}){
+  let transformed = wrap(options.transpile(transform(parse('\n' + src, options), options)));
+  return options.raw ? transformed : vm.runInContext(transformed, vm.createContext(options.locals || {}));
 }

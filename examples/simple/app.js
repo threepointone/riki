@@ -2,18 +2,104 @@ import React, { Component } from 'react';
 import {markdown} from 'markdown';
 import {State} from 'react-state';
 import {Spring} from 'react-motion';
-import { riki } from '../../src';
+import {riki} from '../../src';
+
+import * as babel from 'babel-core/browser';
+
+let modules = {
+  react: React,
+  markdown: markdown,
+  'react-state': {State},
+  'react-motion': {Spring}
+};
+
+const locals = {
+  require(module){
+    if(modules[module]){
+      return modules[module];
+    }
+    throw new Error(`module '${module}' not found`);
+  }
+};
+
+const transforms = {
+  md(text, content){
+    return `;${content}.push(<div dangerouslySetInnerHTML={{__html: ${JSON.stringify(markdown.toHTML(text))}}}/>);`;
+  }
+};
+
+const transpile = src => babel.transform(src, {stage: 0}).code;
+
+const preview = src => {
+  try{
+    return ({
+      input: src,
+      preview: riki(src, {
+        locals,
+        transforms,
+        transpile
+      }),
+      error: null
+    });
+  }
+  catch(err){
+    console.error(err);
+    return ({
+      input: src,
+      error: err
+    });
+  }
+};
+
+const styles = {
+  wrap: {
+    flexDirection: 'row',
+    display: 'flex',
+    flex: 1
+  },
+  input: {
+    flex: 1
+  },
+  textarea: {
+    flex: 1,
+    fontFamily: 'monospace',
+    padding: 20
+  },
+  error: {
+    backgroundColor: 'red',
+    color: 'white'
+  },
+  preview: {
+    flex: 1
+  }
+};
+
+export class App extends Component {
+  state = preview(initial)
+  onChange = e => this.setState(preview(e.target.value))
+  render() {
+    return <div style={styles.wrap}>
+      <div style={styles.input}>
+        <textarea style={styles.textarea} value={this.state.input} onChange={this.onChange} />
+        { this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
+      </div>
+      <div style={styles.preview}>{this.state.preview}</div>
+    </div>;
+  }
+}
 
 
 let initial = `
 :js:
+  import React from 'react';
   import {State} from 'react-state';
   import {Spring} from 'react-motion';
 
   let box = {
     width: 100,
     height: 100,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    cursor: 'pointer'
   };
 
 :render:
@@ -24,6 +110,7 @@ let initial = `
     </div>
   }</Spring>
 }</State>
+
 :md:
 An h1 header
 ============
@@ -47,64 +134,3 @@ content starts at 4-columns in.
 > if you like.
 
 `;
-
-
-let modules = {
-  react: React,
-  markdown,
-  'react-state': {State},
-  'react-motion': {Spring}
-};
-
-const styles = {
-  wrap: {
-    flexDirection: 'row',
-    display: 'flex',
-    flex: 1
-  },
-  input: {
-    flex: 1
-  },
-  textarea: {
-    flex: 1,
-    fontFamily: 'monospace'
-  },
-  preview: {
-    flex: 1
-  }
-};
-
-export class App extends Component {
-  state = {
-    input: initial
-  }
-  preview(src){
-    try{
-      return riki(src, {
-        require(module) {
-          if(modules[module]){
-            return modules[module];
-          }
-          throw new Error(`module '${module}' not found`);
-        },
-        transforms: {
-          md(text){
-            return `;___content___.push(<div dangerouslySetInnerHTML={{__html: ${JSON.stringify(markdown.toHTML(text))}}}/>);`;
-          }
-        }
-      });
-    }
-    catch(e){
-      console.error(e.message);
-    }
-  }
-  render() {
-    return <div style={styles.wrap}>
-      <div style={styles.input}>
-        <textarea style={styles.textarea} value={this.state.input} onChange={e => this.setState({input: e.target.value})} />
-      </div>
-      <div style={styles.preview}>{this.preview(this.state.input)}</div>
-    </div>;
-  }
-}
-

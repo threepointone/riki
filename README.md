@@ -22,20 +22,24 @@ Would you like to write your blogposts/README/articles like this?
   *Welcome* to the [react-motion](https://github.com/chenglou/react-motion/) playground!
 
 :render:
-  <State initial={{top:0, left:0}}>{
-    (state, set) => <Spring endValue={state}>{
-      value => <div style={{flex:1}} onMouseMove={ e=> set({top: e.pageY, x: e.pageX})}>
-        <div style={{…value, ...box}}>move it move it</div>
+  <State initial={{top:0, left:0}}>{ (state, set) =>
+    <Spring endValue={state}>{ value =>
+      <div style={{flex:1}} onMouseMove={e => set({top: e.pageY, x: e.pageX})}>
+        <div style={{...value, ...box}}>move it move it</div>
       </div>
     }</Spring>
   }</State>
   ```
 
-  And then have it render automatically to html/native?
+  And then render it to html/native?
 
   With riki, anything is possible.
 
 ```js
 riki(src, options); // returns an array of react components
 ```
+
+- locals: map of locally available references when evaluating. These include stuff like `React`, `require` (needed if you're using `import`), etc
+- transforms: map of transforms for different 'types'. `js`, and `render` are included by default, so this is where you can pass transformers for markdown, jade, etc
+- regex: regular expression to detect `:(type):` separators (defaults to `/\n:([a-zA-Z0-9]*):\n/img`)
 
