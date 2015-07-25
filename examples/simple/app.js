@@ -81,7 +81,7 @@ export class App extends Component {
     return <div style={styles.wrap}>
       <div style={styles.input}>
         <textarea style={styles.textarea} value={this.state.input} onChange={this.onChange} />
-        { this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
+        {this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
       </div>
       <div style={styles.preview}>{this.state.preview}</div>
     </div>;
