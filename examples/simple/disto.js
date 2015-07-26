@@ -45,3 +45,4 @@ export class Connect extends React.Component{
     }</Connector>;
   }
 }
+

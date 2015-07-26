@@ -1,10 +1,10 @@
 /* global babel */
 import React, { Component } from 'react';
 import {markdown} from 'markdown';
-import {State} from 'react-state';
-import {Spring} from 'react-motion';
+import * as rState from 'react-state';
+import * as rMotion from 'react-motion';
 
-import {Ajax} from 'react-superagent';
+import * as rAjax from 'react-superagent';
 
 import * as disto from './disto';
 
@@ -22,9 +22,9 @@ import qs from 'querystring';
 let modules = {
   react: React,
   markdown: markdown,
-  'react-state': {State},
-  'react-motion': {Spring},
-  'react-superagent': {Ajax},
+  'react-state': rState,
+  'react-motion': rMotion,
+  'react-superagent': rAjax,
   'redux': redux,
   'react-redux': rRedux,
   'redux-thunk': thunk,
