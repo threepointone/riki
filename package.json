@@ -1,6 +1,6 @@
 {
   "name": "riki",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "evil markup for documents",
   "main": "lib/index.js",
   "repository": {
