@@ -1,6 +1,6 @@
 {
   "name": "riki",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "markup for react",
   "main": "lib/index.js",
   "repository": {
@@ -8,8 +8,8 @@
     "url": "https://github.com/threepointone/riki.git"
   },
   "scripts": {
-      "test": "mocha"
-    },
+    "test": "mocha"
+  },
   "keywords": [
     "react",
     "markup"
