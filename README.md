@@ -44,7 +44,7 @@ example
 let src = `
 :js:
   let user = {id: 'threepointone', name: 'Sunil Pai'};
-: render
+:render:
   <div> Hello {user.name}! </div>
 `;
 
