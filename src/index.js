@@ -11,16 +11,18 @@ let transforms = {
   }
 };
 
-export function * matches(src, regex) {
+export function matches(src, regex) {
+  let results = [];
   let match = regex.exec(src);
   while (match !== null) {
-    yield match;
+    results.push(match);
     match = regex.exec(src);
   }
+  return results;
 }
 
 export function parse (str, options={}) {
-  return [for (x of matches(str, options.regex || /\n:([a-zA-Z0-9]*):\n/img)) x]
+  return matches(str, options.regex || /\n:([a-zA-Z0-9]*):\n/img)
     .map((val, i, arr) => ({
       type: val[1].toLowerCase(),
       content: str.substring(val.index + val[0].length, (i < arr.length - 1) ? arr[i + 1].index : str.length)
