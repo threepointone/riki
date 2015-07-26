@@ -28,7 +28,7 @@ const locals = {
 
 const transforms = {
   md(text, content){
-    return `;${content}.push(<div dangerouslySetInnerHTML={{__html: ${JSON.stringify(markdown.toHTML(text))}}}/>);`;
+    return `;${content}.push(<div className='markdown' dangerouslySetInnerHTML={{__html: ${JSON.stringify(markdown.toHTML(text))}}}/>);`;
   }
 };
 
