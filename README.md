@@ -36,6 +36,8 @@ Would you like to write your blogposts/README/articles like this?
 
   With riki, anything is possible.
 
+  [demo - live editor](threepointone.github.io/riki/examples/simple)
+
 ```js
 riki(src, options); // returns {raw: String, content: function -> Array}
 ```
