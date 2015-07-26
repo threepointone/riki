@@ -79,7 +79,14 @@ const styles = {
 
 export class App extends Component {
   state = preview(initial)
-  onChange = e => this.setState(preview(e.target.value))
+  onChange = e => {
+    let frame = preview(e.target.value);
+    this.setState(frame);
+    if(!frame.error){
+      window.location.hash = JSON.stringify({src: e.target.value});
+    }
+
+  }
   render() {
     return <div style={styles.wrap}>
       <div style={styles.input}>
@@ -91,8 +98,18 @@ export class App extends Component {
   }
 }
 
+var frame;
 
-let initial = `
+try{
+  if(window.location.hash){
+    frame = JSON.parse(window.location.hash.slice(1)).src;
+  }
+}
+catch(e){
+  console.error(e);
+}
+
+let initial = frame || `
 :js:
   import React from 'react';
   import {State} from 'react-state';
