@@ -6,6 +6,8 @@ import {Spring} from 'react-motion';
 import {riki} from '../../src';
 import Ace from './ace';
 
+import qs from 'querystring';
+
 // import * as babel from 'babel-core/browser';
 
 let modules = {
@@ -91,7 +93,7 @@ export class App extends Component {
     let frame = preview(value);
     this.setState(frame);
     if(!frame.error){
-      window.location.hash = encodeURIComponent(JSON.stringify({src: value}));
+      window.history.replaceState({}, 'riki', window.location.pathname + '?' + qs.stringify({src: value}));
     }
 
   }
@@ -109,8 +111,9 @@ export class App extends Component {
 var frame;
 
 try{
-  if(window.location.hash){
-    frame = JSON.parse(decodeURIComponent(window.location.hash.slice(1))).src;
+
+  if(window.location.search){
+    frame = qs.parse(window.location.search.slice(1)).src;
   }
 }
 catch(e){
@@ -164,3 +167,4 @@ content starts at 4-columns in.
 `;
 
 // <textarea style={styles.textarea} value={this.state.input} onChange={this.onChange} />
+
