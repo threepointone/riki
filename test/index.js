@@ -55,7 +55,7 @@ let x = 123;
 :render:
 <div>{x}</div>`;
 
-      React.renderToStaticMarkup(riki(src, {transpile, locals: {React}}).content[0]).should.eql('<div>123</div>');
+      React.renderToStaticMarkup(riki(src, {transpile, locals: {React}}).content()[0]).should.eql('<div>123</div>');
     });
   });
 });

@@ -41,7 +41,7 @@ const preview = src => {
 
     return {
       input: src,
-      preview: result.content,
+      preview: result.content(),
       error: null
     };
   }
