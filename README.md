@@ -7,7 +7,7 @@ riki
 
 Would you like to write your blogposts/README/articles like this?
 
-```
+```js
 :js:
   import React from 'react';
   import {Spring} from 'react-motion'
