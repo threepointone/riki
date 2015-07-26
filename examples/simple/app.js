@@ -1,10 +1,11 @@
+/* global babel */
 import React, { Component } from 'react';
 import {markdown} from 'markdown';
 import {State} from 'react-state';
 import {Spring} from 'react-motion';
 import {riki} from '../../src';
 
-import * as babel from 'babel-core/browser';
+// import * as babel from 'babel-core/browser';
 
 let modules = {
   react: React,
@@ -32,22 +33,24 @@ const transpile = src => babel.transform(src, {stage: 0}).code;
 
 const preview = src => {
   try{
-    return ({
-      input: src,
-      preview: riki(src, {
-        locals,
-        transforms,
-        transpile
-      }),
-      error: null
+    let result = riki(src, {
+      locals,
+      transforms,
+      transpile
     });
+
+    return {
+      input: src,
+      preview: result.content,
+      error: null
+    };
   }
   catch(err){
     console.error(err);
-    return ({
+    return {
       input: src,
       error: err
-    });
+    };
   }
 };
 

@@ -44,9 +44,12 @@ const locals = {
 
 const transpile = src => babel.transform(src, {stage: 0}).code;
 
-console.log(riki(initial, {
+let html = riki(initial, {
   locals,
   transpile
-}).map(React.renderToString));
+}).map(React.renderToString);
+
+console.log(html);
+
 
 
