@@ -3,7 +3,7 @@ riki
 
 (work in progress)
 
-`npm install babel markdown riki --save`
+`npm install riki --save`
 
 Would you like to write your blogposts/README/articles like this?
 
