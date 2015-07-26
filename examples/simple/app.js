@@ -6,11 +6,11 @@ import * as rMotion from 'react-motion';
 
 import * as rAjax from 'react-superagent';
 
-import * as disto from './disto';
+// import * as disto from './disto';
 
-import * as redux from 'redux';
-import * as rRedux from 'react-redux';
-import thunk from 'redux-thunk';
+// import * as redux from 'redux';
+// import * as rRedux from 'react-redux';
+// import thunk from 'redux-thunk';
 
 import {riki} from '../../src';
 import Ace from './ace';
@@ -24,11 +24,11 @@ let modules = {
   markdown: markdown,
   'react-state': rState,
   'react-motion': rMotion,
-  'react-superagent': rAjax,
-  'redux': redux,
-  'react-redux': rRedux,
-  'redux-thunk': thunk,
-  'disto': disto
+  'react-superagent': rAjax
+  // 'redux': redux,
+  // 'react-redux': rRedux,
+  // 'redux-thunk': thunk,
+  // 'disto': disto
 };
 
 
