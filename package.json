@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "build": "rm -rf ./lib && babel src -d lib"
+    "build": "rm -rf ./lib && babel src -d lib",
+    "bundle": "curl http://localhost:3000/examples/simple/bundle.js | uglifyjs -m -c  > examples/simple/bundle.js"
   },
   "keywords": [
     "react",
