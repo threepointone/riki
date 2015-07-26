@@ -30,8 +30,8 @@ export function parse (str, options={}) {
 }
 
 export function transform(arr, options={}) {
-  let t = {...transforms, ...(options.transforms || {})};
-  return `;var ${CONTENT} = [];` + arr.map(block => t[block.type](block.content, `${CONTENT}`)).join('\n');
+  let xform = type => transforms[type] || (options.transforms || {})[type];
+  return `;var ${CONTENT} = [];` + arr.map(block => xform(block.type)(block.content, `${CONTENT}`)).join('\n');
 }
 
 export function wrap(src) {
