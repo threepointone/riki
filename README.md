@@ -37,8 +37,31 @@ Would you like to write your blogposts/README/articles like this?
   With riki, anything is possible.
 
 ```js
-riki(src, options); // returns {raw: String, content: Array}
+riki(src, options); // returns {raw: String, content: function -> Array}
 ```
+example
+```js
+let src = `
+:js:
+  let user = {id: 'threepointone', name: 'Sunil Pai'};
+: render
+  <div> Hello {user.name}! </div>
+`;
+
+let content = riki(src, {
+  locals: {
+    React: require('React')
+  },
+  transpile: code => babel.transform(code, {stage: 0}).code
+}).content();
+
+// gives [<div> Hello Sunil Pai!</div>], an array of react elements
+
+React.renderToStaticMarkup(content[0]);
+// "<div> Hello Sunil Pai!</div>"
+
+```
+
 options
 ---
 - `locals`: map of locally available references when evaluating. These include stuff like `React`, `require` (needed if you're using `import`), etc
