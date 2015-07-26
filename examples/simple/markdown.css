@@ -1,6 +1,7 @@
-/*html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }*/
+/*html { font-size: 100%; overflow-y: scroll; }*/
 
 .markdown {
+-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;
 color:#444;
 font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 font-size:14px;
@@ -11,6 +12,9 @@ padding:2em;
 /*background:#fefefe;*/
 }
 
+ .ace_line{
+  display:block;
+}
 .markdown a{ color: #0645ad; text-decoration:none;}
 .markdown a:visited{ color: #0b0080; }
 .markdown a:hover{ color: #06e; }

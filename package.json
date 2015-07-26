@@ -29,6 +29,7 @@
     "babel-loader": "^5.1.4",
     "brace": "^0.5.1",
     "chai": "^3.2.0",
+    "disto": "^1.5.4",
     "eslint": "^0.23",
     "eslint-plugin-react": "^2.3.0",
     "markdown": "^0.5.0",
@@ -36,9 +37,14 @@
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.8",
     "react-motion": "^0.2.2",
+    "react-redux": "^0.2.2",
     "react-springs": "^1.0.13",
     "react-state": "^1.0.7",
+    "react-superagent": "^1.0.4",
     "rebound": "0.0.13",
+    "redux": "^1.0.0-rc",
+    "redux-thunk": "^0.1.0",
+    "superagent": "^1.2.0",
     "webpack": "^1.9.6",
     "webpack-dev-server": "^1.8.2"
   }

@@ -3,6 +3,15 @@ import React, { Component } from 'react';
 import {markdown} from 'markdown';
 import {State} from 'react-state';
 import {Spring} from 'react-motion';
+
+import {Ajax} from 'react-superagent';
+
+import * as disto from './disto';
+
+import * as redux from 'redux';
+import * as rRedux from 'react-redux';
+import thunk from 'redux-thunk';
+
 import {riki} from '../../src';
 import Ace from './ace';
 
@@ -14,8 +23,15 @@ let modules = {
   react: React,
   markdown: markdown,
   'react-state': {State},
-  'react-motion': {Spring}
+  'react-motion': {Spring},
+  'react-superagent': {Ajax},
+  'redux': redux,
+  'react-redux': rRedux,
+  'redux-thunk': thunk,
+  'disto': disto
 };
+
+
 
 const locals = {
   require(module){
@@ -100,7 +116,7 @@ export class App extends Component {
   render() {
     return <div style={styles.wrap}>
       <div style={styles.input}>
-        <Ace name='TEXTAREA' value={this.state.input} onChange={this.onChange} theme="github" style={styles.textarea} />
+        <Ace name='TEXTAREA' value={this.state.input} onChange={this.onChange} mode='javascript' theme='clouds' style={styles.textarea} />
         {this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
       </div>
       <div style={styles.preview}>{this.state.preview}</div>
