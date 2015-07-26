@@ -4,6 +4,7 @@ import {markdown} from 'markdown';
 import {State} from 'react-state';
 import {Spring} from 'react-motion';
 import {riki} from '../../src';
+import Ace from './ace';
 
 // import * as babel from 'babel-core/browser';
 
@@ -58,39 +59,46 @@ const styles = {
   wrap: {
     flexDirection: 'row',
     display: 'flex',
-    flex: 1
+    flex: 1,
+    overflow: 'auto',
+    padding: 20,
+    backgroundColor: '#ccc'
   },
   input: {
     flex: 1
   },
   textarea: {
     flex: 1,
-    fontFamily: 'monospace',
-    padding: 20
+    marginRight: 20
+
+    // fontFamily: 'monospace',
+    // padding: 20
   },
   error: {
     backgroundColor: 'red',
     color: 'white'
   },
   preview: {
-    flex: 1
+    flex: 1,
+    overflow: 'auto',
+    backgroundColor: 'white'
   }
 };
 
 export class App extends Component {
   state = preview(initial)
-  onChange = e => {
-    let frame = preview(e.target.value);
+  onChange = value => {
+    let frame = preview(value);
     this.setState(frame);
     if(!frame.error){
-      window.location.hash = JSON.stringify({src: e.target.value});
+      window.location.hash = encodeURIComponent(JSON.stringify({src: value}));
     }
 
   }
   render() {
     return <div style={styles.wrap}>
       <div style={styles.input}>
-        <textarea style={styles.textarea} value={this.state.input} onChange={this.onChange} />
+        <Ace name='TEXTAREA' value={this.state.input} onChange={this.onChange} theme="github" style={styles.textarea} />
         {this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
       </div>
       <div style={styles.preview}>{this.state.preview}</div>
@@ -102,7 +110,7 @@ var frame;
 
 try{
   if(window.location.hash){
-    frame = JSON.parse(window.location.hash.slice(1)).src;
+    frame = JSON.parse(decodeURIComponent(window.location.hash.slice(1))).src;
   }
 }
 catch(e){
@@ -154,3 +162,5 @@ content starts at 4-columns in.
 > if you like.
 
 `;
+
+// <textarea style={styles.textarea} value={this.state.input} onChange={this.onChange} />
