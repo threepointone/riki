@@ -11,7 +11,7 @@ cover:
 	istanbul cover node_modules/.bin/_mocha
 
 dev:
-	./node_modules/.bin/babel-node server.js
+	babel-node server.js
 
 hot:
 	HOT=1 make dev

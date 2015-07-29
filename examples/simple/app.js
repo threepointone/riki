@@ -59,7 +59,6 @@ const preview = src => {
     });
 
     return {
-      input: src,
       preview: result.content(),
       error: null
     };
@@ -67,7 +66,6 @@ const preview = src => {
   catch(err){
     console.error(err);
     return {
-      input: src,
       error: err
     };
   }
@@ -104,10 +102,14 @@ const styles = {
 };
 
 export class App extends Component {
-  state = preview(initial)
+  state = {...preview(initial), input: initial}
   onChange = value => {
     let frame = preview(value);
-    this.setState(frame);
+    this.setState({
+      ...frame,
+      input: value
+    });
+
     if(!frame.error){
       window.history.replaceState({}, 'riki', window.location.pathname + '?' + qs.stringify({src: value}));
     }
@@ -119,8 +121,14 @@ export class App extends Component {
         <Ace name='TEXTAREA' value={this.state.input} onChange={this.onChange} mode='javascript' theme='clouds' style={styles.textarea} />
         {this.state.error ? <div style={styles.error}>{this.state.error.message}</div> : null}
       </div>
-      <div style={styles.preview}>{this.state.preview}</div>
+      <Preview content={this.state.preview}/>
     </div>;
+  }
+}
+
+class Preview{
+  render(){
+    return <div style={styles.preview}>{this.props.content}</div>;
   }
 }
 

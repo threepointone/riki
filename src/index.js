@@ -4,10 +4,10 @@ let CONTENT = '___content___';
 
 let transforms = {
   js(src) {
-    return src;
+    return '\n' + src;
   },
   render(src, content) {
-    return `;${content}.push(${src});`;
+    return `\n;${content}.push(${src});`;
   }
 };
 
@@ -21,7 +21,7 @@ export function matches(src, regex) {
   return results;
 }
 
-export function parse (str, options={}) {
+export function parse(str, options={}) {
   return matches(str, options.regex || /\n:([a-zA-Z0-9]*):\n/img)
     .map((val, i, arr) => ({
       type: val[1].toLowerCase(),
@@ -31,7 +31,7 @@ export function parse (str, options={}) {
 
 export function transform(arr, options={}) {
   let xform = type => transforms[type] || (options.transforms || {})[type];
-  return `;var ${CONTENT} = [];` + arr.map(block => xform(block.type)(block.content, `${CONTENT}`)).join('\n');
+  return `;var ${CONTENT} = [];` + arr.map(block => xform(block.type)(block.content, CONTENT)).join('\n');
 }
 
 export function wrap(src) {

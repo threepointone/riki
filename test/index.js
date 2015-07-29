@@ -43,7 +43,7 @@ I *love* [the glitch mob](http://www.theglitchmob.com/)
           return `;${content}.push(<div dangerouslySetInnerHTML={{__html: ${JSON.stringify(markdown.toHTML(text))}}}/>);`;
         }
       };
-      transform(parse(src), {transforms}).should.eql(';var ___content___ = [];var x = 123;\n;___content___.push(<div dangerouslySetInnerHTML={{__html: \"<p>I <em>love</em> <a href=\\\"http://www.theglitchmob.com/\\\">the glitch mob</a></p>\"}}/>);');
+      transform(parse(src), {transforms}).should.eql(';var ___content___ = [];\nvar x = 123;\n;___content___.push(<div dangerouslySetInnerHTML={{__html: \"<p>I <em>love</em> <a href=\\\"http://www.theglitchmob.com/\\\">the glitch mob</a></p>\"}}/>);');
     });
 
   });

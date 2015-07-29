@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import path from 'path';
 
 let config = {
   devtool: 'source-map',
@@ -16,6 +17,10 @@ let config = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
+      loaders: ['babel-loader']
+    }, {
+      test: /\.js$/,
+      include: [/react\-motion/, /react\-state/, /react\-superagent/],
       loaders: ['babel-loader']
     }]
   },

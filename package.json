@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha",
     "build": "rm -rf ./lib && babel src -d lib",
-    "bundle": "curl http://localhost:3000/examples/simple/bundle.js | uglifyjs -m -c  > examples/simple/bundle.js"
+    "bundle": "curl http://localhost:3000/examples/simple/bundle.js | uglifyjs -m -c  > examples/simple/bundle.js && cat examples/simple/bundle.js | gzip | wc -c"
   },
   "keywords": [
     "react",
@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/threepointone/riki",
   "devDependencies": {
-    "babel": "^5.5.8",
-    "babel-core": "^5.6.18",
-    "babel-eslint": "^3.1.15",
+    "babel": "^5.8.12",
+    "babel-core": "^5.8.12",
+    "babel-eslint": "^3.1.30",
     "babel-loader": "^5.1.4",
+    "babel-plugin-react-error-catcher": "^1.1.2",
     "brace": "^0.5.1",
     "chai": "^3.2.0",
     "disto": "^1.5.4",
@@ -36,11 +37,11 @@
     "mocha": "^2.2.5",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.8",
-    "react-motion": "^0.2.2",
+    "react-motion": "^0.2.4",
     "react-redux": "^0.2.2",
     "react-springs": "^1.0.13",
     "react-state": "^1.0.7",
-    "react-superagent": "^1.0.4",
+    "react-superagent": "^1.1.0",
     "rebound": "0.0.13",
     "redux": "^1.0.0-rc",
     "redux-thunk": "^0.1.0",
