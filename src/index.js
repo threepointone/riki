@@ -35,7 +35,7 @@ export function transform(arr, options={}) {
 }
 
 export function wrap(src) {
-  return `;(function(){` + src + `;return ${CONTENT};});`;
+  return `(function(){` + src + `;return ${CONTENT};})`;
 }
 
 export function riki(src, options = {}){

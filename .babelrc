@@ -1,5 +1,8 @@
 {
   "stage": 0,
+  "optional": [
+    "runtime"
+  ],
   "plugins":[
     "babel-plugin-react-error-catcher/examples/webpack/error-catcher"
   ]
